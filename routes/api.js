@@ -4,11 +4,20 @@ var router = express.Router();
 // Require controller modules.
 var user_controller = require('../controllers/userController');
 
-// GET request for one User.
+// GET request for one User details.
+router.get('/user', user_controller.user_info);
+
+// GET request for one User details.
 router.get('/user/:id', user_controller.user_detail);
 
 // POST request for creating User.
 router.post('/user/create', user_controller.user_create_post);
+
+// POST request for login User.
+router.post('/user/login', user_controller.user_login_post);
+
+// POST request for login User.
+router.post('/user/logout', user_controller.user_logout_post);
 
 // GET request for list of all Users.
 router.get('/users', user_controller.user_list);

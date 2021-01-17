@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pl" ng-app>
+<html lang="pl" ng-app="nodeBlog">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,6 +10,7 @@
 
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="core.js"></script>
 
     <title>Hello, world!</title>
   </head>
@@ -21,11 +22,21 @@
         <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
       </div>
       <br>
-      <div>
-        <label>Name:</label>
-        <input type="text" ng-model="yourName" placeholder="Enter a name here">
-        <hr>
-        <h1>Hello {{yourName}}!</h1>
+      <div id="user-form" ng-controller="userController">
+        <form>
+          <div class="mb-3">
+            <label for="userInputName" class="form-label">Username</label>
+            <input type="text" class="form-control" id="userInputName" ng-model="userForm.name" required>
+          </div>
+          <div class="mb-3">
+            <label for="userInputPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="userInputPassword" ng-model="userForm.password" required>
+          </div>
+          <button class="btn btn-primary" ng-click="createUser()">Register</button>
+          <button type="submit" class="btn btn-primary" ng-click="loginUser()">Login</button>
+          <button class="btn btn-primary" ng-click="logoutUser()">Logout</button>
+          <span>{{userForm}}</span><span>{{user}}</span><span>{{user.name}}</span><span>{{user.message}}</span>
+        </form>
       </div>
   
     </main>
