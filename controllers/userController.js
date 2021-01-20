@@ -43,6 +43,7 @@ exports.user_login_post = function(req, res) {
             hash({ password: req.body.password, salt: user.salt }, function (err, pass, salt, hash) {
                 if (err) res.send(err);
                 if (hash === user.hash) {
+                    req.session.userid = user._id;
                     req.session.username = user.name;
                     res.json({ name: user.name });
                 }

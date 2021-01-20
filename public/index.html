@@ -38,7 +38,19 @@
           <span>{{userForm}}</span><span>{{user}}</span><span>{{user.name}}</span><span>{{user.message}}</span>
         </form>
       </div>
-  
+      <div id="post-form">
+        <form>
+          <div class="mb-3">
+            <label for="postTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="postTitle">
+          </div>
+          <div class="mb-3">
+            <label for="postTextarea">Content</label>
+            <textarea class="form-control" id="postTextarea" rows="10"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" ng-click="postCreate()">Submit</button>
+        </form>
+      </div>
     </main>
 
   </body>
