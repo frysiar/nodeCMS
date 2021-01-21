@@ -19,3 +19,11 @@ exports.post_create = function(req, res) {
         }
     );
 };
+
+// Display list of all Posts.
+exports.post_list = function(req, res) {
+    Post.find(function(err, list_posts) {
+        if (err) res.send(err);
+        res.json(list_posts);
+    });
+};

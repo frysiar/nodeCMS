@@ -52,6 +52,13 @@
           <span>{{postForm}}</span>
         </form>
       </div>
+      <div id="post-list">
+        <p>Lista postów:</p>
+        <div ng-repeat="post in postList">
+          <h2>{{post.title}}</h2>
+          <p>{{post.content}}</p>
+        </div>
+      </div>
     </main>
 
   </body>

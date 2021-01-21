@@ -29,4 +29,8 @@ router.get('/post/:id', post_controller.post_detail);
 // POST request for creating Post.
 router.post('/post', post_controller.post_create);
 
+// GET request for list of all Posts.
+router.get('/posts', post_controller.post_list);
+
+
 module.exports = router;

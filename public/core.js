@@ -5,6 +5,14 @@ angular.module('nodeBlog', [])
 
     $scope.postForm = {};
 
+    $http
+    .get("/api/posts")
+    .then(function(response) {
+        $scope.postList = response.data;
+    }, function(response) {
+        console.log("Error postList(): " + response.data);
+    });
+
     $scope.createUser = function() {
         $http
         .post("/api/user/create", $scope.userForm)
