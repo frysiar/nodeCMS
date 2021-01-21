@@ -14,7 +14,7 @@
 
     <title>Hello, world!</title>
   </head>
-  <body>
+  <body ng-controller="mainController">
     <main class="container">
       <div class="bg-light p-5 rounded mt-3">
         <h1>Hello, world!</h1>
@@ -22,7 +22,7 @@
         <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
       </div>
       <br>
-      <div id="user-form" ng-controller="userController">
+      <div id="user-form">
         <form>
           <div class="mb-3">
             <label for="userInputName" class="form-label">Username</label>
@@ -42,13 +42,14 @@
         <form>
           <div class="mb-3">
             <label for="postTitle" class="form-label">Title</label>
-            <input type="text" class="form-control" id="postTitle">
+            <input type="text" class="form-control" id="postTitle" ng-model="postForm.title">
           </div>
           <div class="mb-3">
             <label for="postTextarea">Content</label>
-            <textarea class="form-control" id="postTextarea" rows="10"></textarea>
+            <textarea class="form-control" id="postTextarea" rows="10" ng-model="postForm.content"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" ng-click="postCreate()">Submit</button>
+          <button type="submit" class="btn btn-primary" ng-click="createPost()">Submit</button>
+          <span>{{postForm}}</span>
         </form>
       </div>
     </main>
