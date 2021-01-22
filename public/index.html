@@ -16,47 +16,56 @@
   </head>
   <body ng-controller="mainController">
     <main class="container">
-      <div class="bg-light p-5 rounded mt-3">
+      <div id="blog-header" class="bg-light p-5 rounded mt-3">
         <h1>Hello, world!</h1>
         <p class="lead">This example is a quick exercise to illustrate how the bottom navbar works.</p>
         <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
       </div>
       <br>
-      <div id="user-form">
-        <form>
-          <div class="mb-3">
-            <label for="userInputName" class="form-label">Username</label>
-            <input type="text" class="form-control" id="userInputName" ng-model="userForm.name" required>
+      <div class="row">
+        <div class="col-md-8">
+          <div id="post-form" ng-show="isPostFormVisible">
+            <form>
+              <div class="mb-3">
+                <label for="postTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="postTitle" ng-model="postForm.title">
+              </div>
+              <div class="mb-3">
+                <label for="postTextarea">Content</label>
+                <textarea class="form-control" id="postTextarea" rows="10" ng-model="postForm.content"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" ng-click="createPost()">Submit</button>
+              <span>{{postForm}}</span>
+            </form>
           </div>
-          <div class="mb-3">
-            <label for="userInputPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="userInputPassword" ng-model="userForm.password" required>
+          <div id="post-list" ng-show="isPostListVisible">
+            <p>Lista postów:</p>
+            <div ng-repeat="post in postList">
+              <h2>{{post.title}}</h2>
+              <p>{{post.content}}</p>
+            </div>
           </div>
-          <button class="btn btn-primary" ng-click="createUser()">Register</button>
-          <button type="submit" class="btn btn-primary" ng-click="loginUser()">Login</button>
-          <button class="btn btn-primary" ng-click="logoutUser()">Logout</button>
-          <span>{{userForm}}</span><span>{{user}}</span><span>{{user.name}}</span><span>{{user.message}}</span>
-        </form>
-      </div>
-      <div id="post-form">
-        <form>
-          <div class="mb-3">
-            <label for="postTitle" class="form-label">Title</label>
-            <input type="text" class="form-control" id="postTitle" ng-model="postForm.title">
+        </div>
+        <div class="col-md-4">
+          <div id="user-form" ng-show="!loggedin">
+            <form>
+              <div class="mb-3">
+                <label for="userInputName" class="form-label">Username</label>
+                <input type="text" class="form-control" id="userInputName" ng-model="userForm.name" required>
+              </div>
+              <div class="mb-3">
+                <label for="userInputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="userInputPassword" ng-model="userForm.password" required>
+              </div>
+              <button class="btn btn-primary" ng-click="createUser()">Register</button>
+              <button type="submit" class="btn btn-primary" ng-click="loginUser()">Login</button>
+              <span>{{userForm}}</span><span>{{user}}</span><span>{{user.name}}</span><span>{{user.message}}</span>
+            </form>
           </div>
-          <div class="mb-3">
-            <label for="postTextarea">Content</label>
-            <textarea class="form-control" id="postTextarea" rows="10" ng-model="postForm.content"></textarea>
+          <div id="user-menu" ng-show="loggedin">
+            <button class="btn btn-primary" ng-click="logoutUser()">Logout</button>
+            <button class="btn btn-primary" ng-click="addPost()">Add Post</button>
           </div>
-          <button type="submit" class="btn btn-primary" ng-click="createPost()">Submit</button>
-          <span>{{postForm}}</span>
-        </form>
-      </div>
-      <div id="post-list">
-        <p>Lista postów:</p>
-        <div ng-repeat="post in postList">
-          <h2>{{post.title}}</h2>
-          <p>{{post.content}}</p>
         </div>
       </div>
     </main>

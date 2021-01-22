@@ -2,6 +2,9 @@ angular.module('nodeBlog', [])
 .controller('mainController', [ '$scope', '$http', function($scope, $http) {
     $scope.userForm = {};
     $scope.user = {};
+    $scope.loggedin = false;
+    $scope.isPostFormVisible = false;
+    $scope.isPostListVisible = true;
 
     $scope.postForm = {};
 
@@ -31,6 +34,8 @@ angular.module('nodeBlog', [])
         .then( function(response) {
             console.log("Login: " + response.data);
             $scope.user = response.data;
+            $scope.userForm = {};
+            $scope.loggedin = true;
         }, function(response) {
             console.log("Error login user: " + response.data);
         });
@@ -41,6 +46,7 @@ angular.module('nodeBlog', [])
         .post("/api/user/logout")
         .then( function(response) {
             console.log("Logout");
+            $scope.loggedin = false;
         }, function(response) {
             console.log("Error logout user");
         });
@@ -51,8 +57,15 @@ angular.module('nodeBlog', [])
         .post("/api/post", $scope.postForm)
         .then(function(response) {
             console.log("Post created: " + response.data._id);
-        }, function(response) {
+            $scope.isPostFormVisible = false;
+            $scope.isPostListVisible = true;
+            }, function(response) {
             console.log("Error creating post: " + response);
         });
+    };
+
+    $scope.addPost = function() {
+        $scope.isPostFormVisible = true;
+        $scope.isPostListVisible = false;
     };
 }]);
