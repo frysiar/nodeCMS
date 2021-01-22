@@ -9,6 +9,15 @@ angular.module('nodeBlog', [])
     $scope.postForm = {};
 
     $http
+    .get("/api/user")
+    .then(function(response) {
+        $scope.user = response.data;
+        if ($scope.user.username) $scope.loggedin = true;
+    }, function(response) {
+        console.log("Error userinfo:" + response.data);
+    });
+
+    $http
     .get("/api/posts")
     .then(function(response) {
         $scope.postList = response.data;

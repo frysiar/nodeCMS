@@ -4,7 +4,8 @@ var hash = require('pbkdf2-password')();
 
 // Display detail page for a specific User.
 exports.user_info = function(req, res) {
-    res.send('NOT IMPLEMENTED: User detail: ' + req.session.username);
+    if (req.session.userid) res.json({ "username": req.session.username });
+    else res.json({});
 };
 
 // Display detail page for a specific User.
