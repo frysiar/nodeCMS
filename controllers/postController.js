@@ -38,9 +38,22 @@ exports.post_update = function(req, res) {
     });
 };
 
+// Handle Post delete on DELETE.
+exports.post_delete = function(req, res) {
+    Post.findByIdAndDelete(req.params.id, function(err, post) {
+        if (err) res.send(err);
+        else {
+            Post.find().sort({date: 'desc'}).exec(function(err, list_posts) {
+                if (err) res.send(err);
+                res.json(list_posts);
+            });
+        }
+    });
+};
+
 // Display list of all Posts.
 exports.post_list = function(req, res) {
-    Post.find(function(err, list_posts) {
+    Post.find().sort({date: 'desc'}).exec(function(err, list_posts) {
         if (err) res.send(err);
         res.json(list_posts);
     });

@@ -29,6 +29,9 @@ router.get('/post/:id', post_controller.post_detail);
 // PUT request for update Post.
 router.put('/post/:id', post_controller.post_update);
 
+// DELETE request for delete Post.
+router.delete('/post/:id', post_controller.post_delete);
+
 // POST request for creating Post.
 router.post('/post', post_controller.post_create);
 

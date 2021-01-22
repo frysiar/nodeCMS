@@ -8,6 +8,7 @@ angular.module('nodeBlog', [])
     $scope.isPostListVisible = true;
 
     $scope.postForm = {};
+    $scope.postList = {};
 
     $http
     .get("/api/user")
@@ -98,6 +99,19 @@ angular.module('nodeBlog', [])
             $scope.isPostViewVisible = true;
         }, function(response) {
             console.log("Error reading post: " + response);
+        });
+    };
+
+    $scope.deletePost = function(id) {
+        $http
+        .delete("/api/post/" + id)
+        .then(function(response) {
+            $scope.postList = response.data;
+            $scope.isPostFormVisible = false;
+            $scope.isPostListVisible = true;
+            $scope.isPostViewVisible = false;
+        }, function(response) {
+            console.log("Error deleting post: " + response);
         });
     };
 
