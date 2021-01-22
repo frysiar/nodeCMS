@@ -57,6 +57,24 @@
               <p><a href="#" ng-click="viewPost(post._id)">Continue reading</a></p>
             </div>
           </div>
+          <div id="mail-form" ng-show="isMailFormVisible">
+            <form ng-submit="sendEmail()">
+              <div class="mb-3">
+                <label for="mailForm" class="form-label">From</label>
+                <input type="email" class="form-control" id="mailForm" ng-model="mailForm.from">
+              </div>
+              <div class="mb-3">
+                <label for="mailSubject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="mailSubject" ng-model="mailForm.subject">
+              </div>
+              <div class="mb-3">
+                <label for="mailTextarea">Message</label>
+                <textarea class="form-control" id="mailTextarea" rows="10" ng-model="mailForm.text"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Send</button>
+              <span>{{mailForm}}</span>
+            </form>
+          </div>
         </div>
         <div class="col-md-4">
           <div id="user-form" ng-show="!loggedin">
@@ -77,6 +95,9 @@
           <div id="user-menu" ng-show="loggedin">
             <button class="btn btn-primary" ng-click="logoutUser()">Logout</button>
             <button class="btn btn-primary" ng-click="addPost()">Add Post</button>
+          </div>
+          <div>
+            <button class="btn btn-primary" ng-click="contactForm()">Send message</button>
           </div>
         </div>
       </div>

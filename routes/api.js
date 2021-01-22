@@ -4,6 +4,7 @@ var router = express.Router();
 // Require controller modules.
 var user_controller = require('../controllers/userController');
 var post_controller = require('../controllers/postController');
+var mail_controller = require('../controllers/mailController');
 
 // GET request for one User details.
 router.get('/user', user_controller.user_info);
@@ -38,5 +39,7 @@ router.post('/post', post_controller.post_create);
 // GET request for list of all Posts.
 router.get('/posts', post_controller.post_list);
 
+// POST request for csending Email.
+router.post('/mail', mail_controller.mail_send);
 
 module.exports = router;

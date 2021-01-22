@@ -6,10 +6,13 @@ angular.module('nodeBlog', [])
     $scope.isPostFormVisible = false;
     $scope.isPostViewVisible = false;
     $scope.isPostListVisible = true;
+    $scope.isMailFormVisible = false;
 
     $scope.postForm = {};
     $scope.postList = {};
 
+    $scope.mailForm = {};
+    
     $http
     .get("/api/user")
     .then(function(response) {
@@ -115,6 +118,19 @@ angular.module('nodeBlog', [])
         });
     };
 
+    $scope.sendEmail = function() {
+        $http
+        .post("/api/mail", $scope.mailForm)
+        .then(function(response) {
+            $scope.isPostFormVisible = false;
+            $scope.isPostListVisible = true;
+            $scope.isPostViewVisible = false;
+            $scope.isMailFormVisible = false;
+        }, function(response) {
+            console.log("Error sending emial" + response.data);
+        });
+    }
+
     $scope.addPost = function() {
         $scope.postForm = {};
         $scope.isPostFormVisible = true;
@@ -126,5 +142,13 @@ angular.module('nodeBlog', [])
         $scope.isPostFormVisible = true;
         $scope.isPostListVisible = false;
         $scope.isPostViewVisible = false;
+    };
+
+    $scope.contactForm = function() {
+        $scope.mailForm = {};
+        $scope.isPostFormVisible = false;
+        $scope.isPostListVisible = false;
+        $scope.isPostViewVisible = false;
+        $scope.isMailFormVisible = true;
     };
 }]);
