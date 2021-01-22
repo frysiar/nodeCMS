@@ -26,6 +26,9 @@ router.get('/users', user_controller.user_list);
 // GET request for Post details.
 router.get('/post/:id', post_controller.post_detail);
 
+// PUT request for update Post.
+router.put('/post/:id', post_controller.post_update);
+
 // POST request for creating Post.
 router.post('/post', post_controller.post_create);
 

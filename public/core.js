@@ -4,6 +4,7 @@ angular.module('nodeBlog', [])
     $scope.user = {};
     $scope.loggedin = false;
     $scope.isPostFormVisible = false;
+    $scope.isPostViewVisible = false;
     $scope.isPostListVisible = true;
 
     $scope.postForm = {};
@@ -66,15 +67,50 @@ angular.module('nodeBlog', [])
         .post("/api/post", $scope.postForm)
         .then(function(response) {
             console.log("Post created: " + response.data._id);
+            $scope.postForm = response.data;
             $scope.isPostFormVisible = false;
-            $scope.isPostListVisible = true;
+            $scope.isPostListVisible = false;
+            $scope.isPostViewVisible = true;
             }, function(response) {
             console.log("Error creating post: " + response);
         });
     };
 
+    $scope.updatePost = function(id) {
+        $http
+        .put("/api/post/" + id, $scope.postForm)
+        .then(function(response) {
+            $scope.isPostFormVisible = false;
+            $scope.isPostListVisible = false;
+            $scope.isPostViewVisible = true;
+        }, function(response) {
+            console.log("Error post update" + response.data);
+        });
+    };
+
+    $scope.viewPost = function(id) {
+        $http
+        .get("/api/post/" + id)
+        .then(function(response) {
+            $scope.postForm = response.data;
+            $scope.isPostFormVisible = false;
+            $scope.isPostListVisible = false;
+            $scope.isPostViewVisible = true;
+        }, function(response) {
+            console.log("Error reading post: " + response);
+        });
+    };
+
     $scope.addPost = function() {
+        $scope.postForm = {};
         $scope.isPostFormVisible = true;
         $scope.isPostListVisible = false;
+        $scope.isPostViewVisible = false;
+    };
+
+    $scope.editPost = function() {
+        $scope.isPostFormVisible = true;
+        $scope.isPostListVisible = false;
+        $scope.isPostViewVisible = false;
     };
 }]);
