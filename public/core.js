@@ -60,6 +60,7 @@ angular.module('nodeBlog', [])
         .post("/api/user/logout")
         .then( function(response) {
             console.log("Logout");
+            $scope.user = {};
             $scope.loggedin = false;
         }, function(response) {
             console.log("Error logout user");
@@ -142,6 +143,13 @@ angular.module('nodeBlog', [])
         $scope.isPostFormVisible = true;
         $scope.isPostListVisible = false;
         $scope.isPostViewVisible = false;
+    };
+
+    $scope.viewPostList = function() {
+        $scope.isPostFormVisible = false;
+        $scope.isPostListVisible = true;
+        $scope.isPostViewVisible = false;
+        $scope.isMailFormVisible = false;
     };
 
     $scope.contactForm = function() {

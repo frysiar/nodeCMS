@@ -18,9 +18,8 @@
   <body ng-controller="mainController">
     <main class="container">
       <div id="blog-header" class="bg-light p-5 rounded mt-3">
-        <h1>Hello, world!</h1>
-        <p class="lead">This example is a quick exercise to illustrate how the bottom navbar works.</p>
-        <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
+        <h1>Blog</h1>
+        <p class="lead">To jest przykładowy blog pozwalający na publikowanie postów.</p>
       </div>
       <br>
       <div class="row">
@@ -37,23 +36,22 @@
               </div>
               <button ng-if="!postForm._id" type="submit" class="btn btn-primary" ng-click="createPost()">Submit</button>
               <button ng-if="postForm._id" type="submit" class="btn btn-primary" ng-click="updatePost(postForm._id)">Update</button>
-              <span>{{postForm}}</span>
             </form>
           </div>
           <div id="post-view" ng-show="isPostViewVisible">
             <h2>{{postForm.title}}</h2>
             <p class="blog-post-meta">{{postForm.date | date:'MMMM d, y HH:mm'}} by <a href="#">Mark</a></p>
             <p>{{postForm.content}}</p>
-            <div ng-show="loggedin">
-              <button class="btn btn-primary" ng-click="editPost(postForm._id)">Edit</button>
-              <button class="btn btn-primary" ng-click="deletePost(postForm._id)">Delete</button>
+            <div>
+              <button class="btn btn-primary" ng-click="editPost(postForm._id)" ng-show="loggedin">Edit</button>
+              <button class="btn btn-primary" ng-click="deletePost(postForm._id)" ng-show="loggedin">Delete</button>
+              <button class="btn btn-primary" ng-click="viewPostList()">Back</button>
             </div>
           </div>
           <div id="post-list" ng-show="isPostListVisible">
-            <p>Lista postów:</p>
             <div ng-repeat="post in postList">
               <h2>{{post.title}}</h2>
-              <p class="blog-post-meta">{{post.date | date:'MMMM d, y HH:mm'}} by <a href="#">Mark</a></p>
+              <p class="blog-post-meta">{{post.date | date:'MMMM d, y HH:mm'}} by <a href="#">Rob</a></p>
               <p><a href="#" ng-click="viewPost(post._id)">Continue reading</a></p>
             </div>
           </div>
@@ -72,7 +70,6 @@
                 <textarea class="form-control" id="mailTextarea" rows="10" ng-model="mailForm.text"></textarea>
               </div>
               <button type="submit" class="btn btn-primary">Send</button>
-              <span>{{mailForm}}</span>
             </form>
           </div>
         </div>
@@ -89,16 +86,19 @@
               </div>
               <button class="btn btn-primary" ng-click="createUser()">Register</button>
               <button type="submit" class="btn btn-primary" ng-click="loginUser()">Login</button>
-              <span>{{userForm}}</span><span>{{user}}</span><span>{{user.name}}</span><span>{{user.message}}</span>
             </form>
           </div>
-          <div id="user-menu" ng-show="loggedin">
-            <button class="btn btn-primary" ng-click="logoutUser()">Logout</button>
-            <button class="btn btn-primary" ng-click="addPost()">Add Post</button>
-          </div>
-          <div>
-            <button class="btn btn-primary" ng-click="contactForm()">Send message</button>
-          </div>
+          <nav id="user-menu" class="navbar navbar-light bg-light">
+            <div class="container-fluid" ng-show="loggedin">
+              <a class="navbar-brand" href="#" ng-click="logoutUser()">Logout</a>
+            </div>
+            <div class="container-fluid" ng-show="loggedin">
+              <a class="navbar-brand" href="#" ng-click="addPost()">Add Post</a>
+            </div>
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#" ng-click="contactForm()">Contact Form</a>
+            </div>
+          </nav>
         </div>
       </div>
     </main>
