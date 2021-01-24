@@ -8,11 +8,6 @@ exports.user_info = function(req, res) {
     else res.json({});
 };
 
-// Display detail page for a specific User.
-exports.user_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: User detail: ' + req.params.id);
-};
-
 // Handle User create on POST.
 exports.user_create_post = function(req, res) {
     User.find({name: req.body.name}, function (err, user) {
@@ -60,13 +55,5 @@ exports.user_login_post = function(req, res) {
 exports.user_logout_post = function(req, res) {
     req.session.destroy(function(){
         res.send('User logged out successfully');
-    });
-};
-
-// Display list of all Users.
-exports.user_list = function(req, res) {
-    User.find(function(err, list_users) {
-        if (err) res.send(err);
-        res.json(list_users);
     });
 };
